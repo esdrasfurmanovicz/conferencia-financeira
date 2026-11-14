@@ -26,7 +26,7 @@
                     <span class="text-sm font-extrabold tracking-tight">Conferência financeira</span>
                 </div>
 
-                <main class="mx-auto max-w-[1360px] px-4 py-6 sm:px-10 sm:py-12">
+                <main class="mx-auto max-w-[1480px] px-4 py-6 sm:px-10 sm:py-12">
                     @isset($header)
                         <header class="mb-8">
                             {{ $header }}

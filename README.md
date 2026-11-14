@@ -33,9 +33,22 @@ A regra de cálculo está isolada em `app/Services/LevyCalculator.php`.
 
 ## Stack
 
-Laravel 12 + Blade + Tailwind (Breeze), SQLite por padrão (zero configuração para rodar local).
-Login simples (sem verificação de e-mail), é uma ferramenta para uso interno de um time pequeno,
-não um produto multiusuário com papéis e permissões.
+Laravel 12 + Blade + Tailwind + Alpine.js (base do Breeze), SQLite por padrão (zero configuração para
+rodar local). Interface toda em português do Brasil.
+
+## Acesso e perfis
+
+Login simples (sem verificação de e-mail), pensado para uso interno de um time pequeno. Há dois
+perfis: **Administrador**, que vê a lista de usuários e pode editar, trocar a senha e remover contas,
+e **Usuário**, que usa a conferência e os cadastros. A primeira conta cadastrada vira administradora,
+e o sistema nunca fica sem um. O cadastro aberto vem ligado (`REGISTRATION_ENABLED`) e a recuperação
+de senha por e-mail vem desligada (`PASSWORD_RESET_ENABLED`) até o envio de e-mail ser configurado.
+
+## Primeiros passos dentro do app
+
+Os principais impostos e os perfis de retenção mais comuns já vêm cadastrados por migration. No
+primeiro acesso, um tour guiado destaca na tela onde fica cada coisa. O botão Ajuda resume a tela
+atual e abre tours específicos, como "Como simular impostos". Os textos ficam em `app/Support/Tours.php`.
 
 ## Rodando localmente
 
@@ -52,6 +65,6 @@ Login de demonstração (criado pelo seeder): `demo@conferencia.app` / `demo1234
 
 ## Fora do escopo (de propósito)
 
-Multi-tenancy, permissões granulares e contratos com vigência/versionamento ficaram de fora para
+Multi-tenancy, permissões além dos dois perfis e contratos com vigência/versionamento ficaram de fora para
 manter o projeto do tamanho de uma peça de portfólio, focada na ideia central: um checklist
 auditável no lugar de planilha.

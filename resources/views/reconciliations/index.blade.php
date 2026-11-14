@@ -19,7 +19,7 @@
                         <a class="btn-secondary btn-sm !px-2.5" aria-label="Mês anterior" href="{{ route('reconciliations.index', ['month' => $period->copy()->subMonth()->format('Y-m')]) }}">&lsaquo;</a>
                         <form method="GET" class="relative">
                             <label for="month-picker" class="sr-only">Mês da conferência</label>
-                            <input id="month-picker" type="month" name="month" value="{{ $monthValue }}" onchange="this.form.submit()" class="w-44 text-sm font-semibold">
+                            <input id="month-picker" type="month" name="month" value="{{ $monthValue }}" onchange="this.form.submit()" class="w-56 text-sm font-semibold">
                         </form>
                         <a class="btn-secondary btn-sm !px-2.5" aria-label="Próximo mês" href="{{ route('reconciliations.index', ['month' => $period->copy()->addMonth()->format('Y-m')]) }}">&rsaquo;</a>
                     </div>
@@ -120,14 +120,14 @@
                         <thead class="bg-paper/70 text-left text-xs text-ink-mute">
                             <tr>
                                 <th class="w-12 py-3 pl-4 pr-0"><span class="sr-only">Conferido</span></th>
-                                <th class="px-5 py-5">Cliente</th>
-                                <th class="px-5 py-5">Perfil</th>
-                                <th class="px-5 py-5 text-right">Base</th>
-                                <th class="px-5 py-5 text-right">Impostos</th>
-                                <th class="px-5 py-5 text-right">Retido</th>
-                                <th class="px-5 py-5 text-right">Líquido</th>
-                                <th class="px-5 py-5">Conferido em</th>
-                                <th class="px-5 py-5"></th>
+                                <th class="px-4 py-5">Cliente</th>
+                                <th class="px-4 py-5">Perfil</th>
+                                <th class="px-4 py-5 text-right">Base</th>
+                                <th class="px-4 py-5 text-right">Impostos</th>
+                                <th class="px-4 py-5 text-right">Retido</th>
+                                <th class="px-4 py-5 text-right">Líquido</th>
+                                <th class="px-4 py-5">Conferido em</th>
+                                <th class="px-4 py-5"></th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-rule/70">
@@ -144,20 +144,20 @@
                                             <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg>
                                         </button>
                                     </td>
-                                    <td class="whitespace-nowrap px-5 py-5 font-semibold">
+                                    <td class="whitespace-nowrap px-4 py-5 font-semibold">
                                         {{ $item->client->name }}
                                         @if ($item->label)<div class="text-xs font-normal text-ink-mute">{{ $item->label }}</div>@endif
                                     </td>
-                                    <td class="px-5 py-5">{{ $item->client->withholdingProfile?->name ?? 'Sem perfil' }}</td>
-                                    <td class="num px-5 py-5">@if ($estimate){{ 'R$ ' . number_format($estimate->base_amount, 2, ',', '.') }}@else<span class="text-xs text-ink-mute">Sem simulação</span>@endif</td>
-                                    <td class="num px-5 py-5">{{ $estimate ? 'R$ ' . number_format($estimate->levies_total, 2, ',', '.') : '' }}</td>
-                                    <td class="num px-5 py-5">{{ $estimate ? 'R$ ' . number_format($estimate->withheld_total, 2, ',', '.') : '' }}</td>
-                                    <td class="num px-5 py-5 font-bold">{{ $estimate ? 'R$ ' . number_format($estimate->net_amount, 2, ',', '.') : '' }}</td>
-                                    <td class="whitespace-nowrap px-5 py-5 text-xs text-ink-mute">
+                                    <td class="whitespace-nowrap px-4 py-5">{{ $item->client->withholdingProfile?->name ?? 'Sem perfil' }}</td>
+                                    <td class="num px-4 py-5">@if ($estimate){{ 'R$ ' . number_format($estimate->base_amount, 2, ',', '.') }}@else<span class="text-xs text-ink-mute">Sem simulação</span>@endif</td>
+                                    <td class="num px-4 py-5">{{ $estimate ? 'R$ ' . number_format($estimate->levies_total, 2, ',', '.') : '' }}</td>
+                                    <td class="num px-4 py-5">{{ $estimate ? 'R$ ' . number_format($estimate->withheld_total, 2, ',', '.') : '' }}</td>
+                                    <td class="num px-4 py-5 font-bold">{{ $estimate ? 'R$ ' . number_format($estimate->net_amount, 2, ',', '.') : '' }}</td>
+                                    <td class="whitespace-nowrap px-4 py-5 text-xs text-ink-mute">
                                         {{ $item->confirmed_at?->format('d/m/Y H:i') }}
                                         @if ($item->confirmedByUser)<div>{{ $item->confirmedByUser->name }}</div>@endif
                                     </td>
-                                    <td class="whitespace-nowrap px-5 py-5 text-right">
+                                    <td class="whitespace-nowrap px-4 py-5 text-right">
                                         <button type="button" class="link-action"
                                             data-tour="simulate" @click="openEstimate({{ $item->id }}, {{ $item->client_id }}, '{{ addslashes($item->client->name) }}', {{ $item->client->withholding_profile_id ?? 'null' }})">Simular</button>
                                         <button type="button" class="link-action" @click="openClientHistory({{ $item->client_id }}, '{{ addslashes($item->client->name) }}')">Histórico</button>

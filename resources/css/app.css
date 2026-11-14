@@ -64,7 +64,7 @@
     .data-table td { @apply px-5 py-5 align-middle; }
     .data-table tbody tr { @apply border-b border-rule/70 last:border-0; }
     .data-table tbody tr:hover { @apply bg-paper/50; }
-    .num { @apply text-right tabular-nums; }
+    .num { @apply whitespace-nowrap text-right; }
 
     /* ---------- Selos de situação ---------- */
     .chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold; }
