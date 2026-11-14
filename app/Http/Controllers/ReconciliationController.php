@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * The monthly checklist: one Reconciliation per period, with one ReconciliationItem per client
  * expected to be reconciled that month. This is the screen meant to replace a finance team's
- * spreadsheet — populate the month in bulk, tick items off as they're checked, and close the
+ * spreadsheet: populate the month in bulk, tick items off as they're checked, and close the
  * month with an auditable trail instead of just overwriting cells.
  */
 class ReconciliationController extends Controller

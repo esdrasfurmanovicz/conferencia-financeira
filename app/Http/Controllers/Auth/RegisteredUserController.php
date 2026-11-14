@@ -36,11 +36,16 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        // A primeira conta do sistema é a do administrador; as demais entram como usuário.
+        $role = User::query()->exists() ? User::ROLE_USER : User::ROLE_ADMIN;
+
+        $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        $user->role = $role; // fora do $fillable de propósito: ninguém escolhe o papel pelo formulário
+        $user->save();
 
         event(new Registered($user));
 

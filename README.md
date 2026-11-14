@@ -1,6 +1,6 @@
 # Conferência Financeira
 
-Checklist mensal para o time financeiro conferir recebimentos de clientes — pensado para
+Checklist mensal para o time financeiro conferir recebimentos de clientes, pensado para
 substituir a planilha que normalmente faz esse trabalho. Feito em Laravel do zero, como peça de
 portfólio.
 
@@ -23,10 +23,10 @@ depois de fechado o mês. Este projeto resolve isso com:
 | Conceito | O que é |
 |---|---|
 | `Levy` (imposto) | Catálogo de impostos, com grupo e piso de retenção opcionais |
-| `RateCard` (tabela de alíquota) | Preset de % por imposto — o que hoje seria um "tipo de serviço" |
+| `RateCard` (tabela de alíquota) | Preset de % por imposto, o que hoje seria um "tipo de serviço" |
 | `WithholdingProfile` (perfil de retenção) | Por imposto: se aplica ao cliente e se é retido |
 | `Client` (cliente) | Vinculado a um perfil de retenção |
-| `LevyEstimate` (simulação) | Resultado congelado de um cálculo — histórico, não pertence a um mês |
+| `LevyEstimate` (simulação) | Resultado congelado de um cálculo; histórico, não pertence a um mês |
 | `Reconciliation` / `ReconciliationItem` / `ReconciliationEvent` | A conferência mensal, seus itens e a trilha de fechamentos/reaberturas |
 
 A regra de cálculo está isolada em `app/Services/LevyCalculator.php`.
@@ -34,7 +34,7 @@ A regra de cálculo está isolada em `app/Services/LevyCalculator.php`.
 ## Stack
 
 Laravel 12 + Blade + Tailwind (Breeze), SQLite por padrão (zero configuração para rodar local).
-Login simples (sem verificação de e-mail) — é uma ferramenta para uso interno de um time pequeno,
+Login simples (sem verificação de e-mail), é uma ferramenta para uso interno de um time pequeno,
 não um produto multiusuário com papéis e permissões.
 
 ## Rodando localmente

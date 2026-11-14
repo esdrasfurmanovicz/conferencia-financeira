@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Usuária Demo', 'password' => bcrypt('demo1234')]
         );
 
+        if (! $user->isAdmin()) {
+            $user->forceFill(['role' => User::ROLE_ADMIN])->save();
+        }
+
         $iss = Levy::firstOrCreate(['code' => 'ISS'], ['name' => 'ISS', 'active' => true]);
         $pis = Levy::firstOrCreate(['code' => 'PIS'], ['name' => 'PIS', 'withholding_group' => 'federais', 'withholding_floor' => 10, 'active' => true]);
         $cofins = Levy::firstOrCreate(['code' => 'COFINS'], ['name' => 'COFINS', 'withholding_group' => 'federais', 'withholding_floor' => 10, 'active' => true]);

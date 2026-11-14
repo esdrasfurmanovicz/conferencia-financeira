@@ -1,51 +1,51 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Perfis de retenção</h2>
+        <h1 class="page-title">Perfis de retenção</h1>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-4">
+    <div class="">
+        <div class="space-y-5">
             <x-flash />
 
-            <p class="text-sm text-gray-500">
-                Cada perfil diz, por imposto: se ele se aplica ao cliente e, se sim, se o cliente retém
+            <p class="text-sm text-ink-mute">
+                Já vêm perfis para os tipos de cliente mais comuns; ajuste ou crie outros se precisar. Cada perfil diz, por imposto: se ele se aplica ao cliente e, se sim, se o cliente retém
                 esse imposto na hora de pagar (em vez de o prestador recolher depois).
             </p>
 
             <div class="flex justify-end">
-                <a href="{{ route('withholding-profiles.create') }}" class="rounded-md bg-gray-800 px-4 py-2 text-sm text-white">Novo perfil</a>
+                <a href="{{ route('withholding-profiles.create') }}" data-tour="add-button" class="btn-primary">Novo perfil</a>
             </div>
 
-            <div class="bg-white shadow-sm rounded-lg overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200 text-sm">
-                    <thead class="bg-gray-50 text-left text-xs uppercase text-gray-500">
+            <div class="table-wrap" data-tour="table">
+                <table class="data-table">
+                    <thead class="bg-paper/70 text-left text-xs text-ink-mute">
                         <tr>
-                            <th class="px-4 py-2">Nome</th>
-                            <th class="px-4 py-2">Clientes vinculados</th>
-                            <th class="px-4 py-2">Situação</th>
-                            <th class="px-4 py-2"></th>
+                            <th class="px-5 py-4">Nome</th>
+                            <th class="px-5 py-4">Clientes vinculados</th>
+                            <th class="px-5 py-4">Situação</th>
+                            <th class="px-5 py-4"></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
+                    <tbody class="divide-y divide-rule/70">
                         @forelse ($profiles as $profile)
                             <tr>
-                                <td class="px-4 py-2">{{ $profile->name }}</td>
-                                <td class="px-4 py-2">{{ $profile->clients_count }}</td>
-                                <td class="px-4 py-2">
-                                    <span class="px-2 py-0.5 rounded text-xs {{ $profile->active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600' }}">
+                                <td class="px-5 py-5">{{ $profile->name }}</td>
+                                <td class="px-5 py-5">{{ $profile->clients_count }}</td>
+                                <td class="px-5 py-5">
+                                    <span class="{{ $profile->active ? 'chip-ok' : 'chip-mute' }}">
                                         {{ $profile->active ? 'Ativo' : 'Inativo' }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-2 text-right space-x-2">
-                                    <a href="{{ route('withholding-profiles.edit', $profile) }}" class="text-indigo-600">Editar</a>
-                                    <form method="POST" action="{{ route('withholding-profiles.destroy', $profile) }}" class="inline" onsubmit="return confirm('Remover este perfil?')">
+                                <td class="whitespace-nowrap px-5 py-5 text-right" data-tour="row-actions">
+                                    <a href="{{ route('withholding-profiles.edit', $profile) }}" class="link-action">Editar</a>
+                                    <form method="POST" action="{{ route('withholding-profiles.destroy', $profile) }}" class="ml-2 inline" data-confirm-title="Remover {{ $profile->name }}?" data-confirm="O perfil e as regras dele serão apagados. Esta ação não pode ser desfeita.">
                                         @csrf @method('DELETE')
-                                        <button class="text-red-600">Remover</button>
+                                        <button class="link-danger">Remover</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="4" class="px-4 py-6 text-center text-gray-400">Nenhum perfil cadastrado ainda.</td></tr>
+                            <tr><td colspan="4" class="px-5 py-12 text-center text-ink-mute">Nenhum perfil cadastrado ainda.</td></tr>
                         @endforelse
                     </tbody>
                 </table>

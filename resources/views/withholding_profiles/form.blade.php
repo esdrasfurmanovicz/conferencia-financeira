@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="page-title">
             {{ $profile->exists ? 'Editar perfil de retenção' : 'Novo perfil de retenção' }}
-        </h2>
+        </h1>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+    <div class="">
+        <div class="max-w-4xl">
             <form method="POST" action="{{ $profile->exists ? route('withholding-profiles.update', $profile) : route('withholding-profiles.store') }}"
-                class="bg-white shadow-sm rounded-lg p-6 space-y-4">
+                class="panel space-y-6 p-6 sm:p-9">
                 @csrf
                 @if ($profile->exists) @method('PUT') @endif
 
@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <x-input-label for="description" value="Descrição (opcional)" />
-                    <textarea id="description" name="description" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ old('description', $profile->description) }}</textarea>
+                    <textarea id="description" name="description" rows="2" class="mt-1 block w-full rounded-lg border-rule">{{ old('description', $profile->description) }}</textarea>
                 </div>
                 <label class="flex items-center gap-2">
                     <input type="checkbox" name="active" value="1" @checked(old('active', $profile->active ?? true))>
@@ -26,17 +26,17 @@
                 </label>
 
                 @if (isset($levies))
-                    <div class="pt-4 border-t">
-                        <h3 class="font-semibold text-gray-800 mb-2">Regras por imposto</h3>
+                    <div class="pt-4 border-t" data-tour="rules">
+                        <h3 class="font-semibold text-ink mb-2">Regras por imposto</h3>
                         <table class="min-w-full text-sm">
-                            <thead class="text-left text-xs uppercase text-gray-500">
+                            <thead class="text-left text-xs text-ink-mute">
                                 <tr>
                                     <th class="py-2">Imposto</th>
                                     <th class="py-2 text-center">Se aplica</th>
                                     <th class="py-2 text-center">É retido</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-100">
+                            <tbody class="divide-y divide-rule/70">
                                 @foreach ($levies as $levy)
                                     @php($rule = $rulesByLevy[$levy->id] ?? null)
                                     <tr>
@@ -53,12 +53,12 @@
                         </table>
                     </div>
                 @else
-                    <p class="text-sm text-gray-400 pt-2 border-t">Salve o perfil para configurar as regras por imposto.</p>
+                    <p class="text-sm text-ink-mute pt-2 border-t">Salve o perfil para configurar as regras por imposto.</p>
                 @endif
 
                 <div class="flex justify-end gap-2 pt-2">
-                    <a href="{{ route('withholding-profiles.index') }}" class="px-4 py-2 text-sm text-gray-600">Voltar</a>
-                    <button class="rounded-md bg-gray-800 px-4 py-2 text-sm text-white">Salvar</button>
+                    <a href="{{ route('withholding-profiles.index') }}" class="btn-ghost">Voltar</a>
+                    <button class="btn-primary">Salvar</button>
                 </div>
             </form>
         </div>

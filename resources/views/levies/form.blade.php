@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="page-title">
             {{ $levy->exists ? 'Editar imposto' : 'Novo imposto' }}
-        </h2>
+        </h1>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+    <div class="">
+        <div class="max-w-3xl">
             <form method="POST" action="{{ $levy->exists ? route('levies.update', $levy) : route('levies.store') }}"
-                class="bg-white shadow-sm rounded-lg p-6 space-y-4">
+                class="panel space-y-6 p-6 sm:p-9">
                 @csrf
                 @if ($levy->exists) @method('PUT') @endif
 
@@ -40,8 +40,8 @@
                 </label>
 
                 <div class="flex justify-end gap-2 pt-2">
-                    <a href="{{ route('levies.index') }}" class="px-4 py-2 text-sm text-gray-600">Cancelar</a>
-                    <button class="rounded-md bg-gray-800 px-4 py-2 text-sm text-white">Salvar</button>
+                    <a href="{{ route('levies.index') }}" class="btn-ghost">Cancelar</a>
+                    <button class="btn-primary">Salvar</button>
                 </div>
             </form>
         </div>

@@ -78,9 +78,24 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'pt_BR'),
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'pt_BR'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Recursos de acesso
+    |--------------------------------------------------------------------------
+    |
+    | O cadastro aberto fica ligado; a recuperação de senha por e-mail fica desligada por padrão.
+    | Ajuste no .env (REGISTRATION_ENABLED, PASSWORD_RESET_ENABLED) quando precisar;
+    | a recuperação de senha só funciona com o envio de e-mail (MAIL_*) configurado.
+    |
+    */
+
+    'registration_enabled' => (bool) env('REGISTRATION_ENABLED', true),
+
+    'password_reset_enabled' => (bool) env('PASSWORD_RESET_ENABLED', false),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 

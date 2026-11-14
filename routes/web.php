@@ -3,8 +3,10 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\LevyController;
+use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RateCardController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReconciliationController;
 use App\Http\Controllers\WithholdingProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('onboarding/complete', [OnboardingController::class, 'complete'])->name('onboarding.complete');
 
     Route::resource('clients', ClientController::class)->except('show');
     Route::resource('levies', LevyController::class)->except('show');
@@ -42,6 +46,15 @@ Route::middleware('auth')->group(function () {
     Route::post('reconciliation/{reconciliation}/close', [ReconciliationController::class, 'close'])->name('reconciliations.close');
     Route::post('reconciliation/{reconciliation}/reopen', [ReconciliationController::class, 'reopen'])->name('reconciliations.reopen');
     Route::get('reconciliation/{reconciliation}/events', [ReconciliationController::class, 'events'])->name('reconciliations.events');
+
+    // Só administradores
+    Route::middleware('admin')->group(function () {
+        Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::patch('users/{user}/password', [UserController::class, 'updatePassword'])->name('users.password');
+        Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
 });
 
 require __DIR__.'/auth.php';

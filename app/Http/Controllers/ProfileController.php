@@ -48,6 +48,11 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        // O sistema não pode ficar sem administrador.
+        if ($user->isAdmin() && \App\Models\User::where('role', \App\Models\User::ROLE_ADMIN)->where('id', '!=', $user->id)->doesntExist()) {
+            return back()->withErrors(['password' => 'Você é o único administrador. Torne outra pessoa administradora antes de excluir a conta.'], 'userDeletion');
+        }
+
         Auth::logout();
 
         $user->delete();

@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="page-title">
             {{ $client->exists ? 'Editar cliente' : 'Novo cliente' }}
-        </h2>
+        </h1>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+    <div class="">
+        <div class="max-w-3xl">
             <form method="POST" action="{{ $client->exists ? route('clients.update', $client) : route('clients.store') }}"
-                class="bg-white shadow-sm rounded-lg p-6 space-y-4">
+                class="panel space-y-6 p-6 sm:p-9">
                 @csrf
                 @if ($client->exists) @method('PUT') @endif
 
@@ -25,7 +25,7 @@
 
                 <div>
                     <x-input-label for="withholding_profile_id" value="Perfil de retenção" />
-                    <select id="withholding_profile_id" name="withholding_profile_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <select id="withholding_profile_id" name="withholding_profile_id" class="mt-1 block w-full rounded-lg border-rule">
                         <option value="">Sem perfil</option>
                         @foreach ($profiles as $profile)
                             <option value="{{ $profile->id }}" @selected(old('withholding_profile_id', $client->withholding_profile_id) == $profile->id)>
@@ -41,8 +41,8 @@
                 </label>
 
                 <div class="flex justify-end gap-2 pt-2">
-                    <a href="{{ route('clients.index') }}" class="px-4 py-2 text-sm text-gray-600">Cancelar</a>
-                    <button class="rounded-md bg-gray-800 px-4 py-2 text-sm text-white">Salvar</button>
+                    <a href="{{ route('clients.index') }}" class="btn-ghost">Cancelar</a>
+                    <button class="btn-primary">Salvar</button>
                 </div>
             </form>
         </div>
