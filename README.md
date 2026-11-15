@@ -68,3 +68,7 @@ Login de demonstração (criado pelo seeder): `demo@conferencia.app` / `demo1234
 Multi-tenancy, permissões além dos dois perfis e contratos com vigência/versionamento ficaram de fora para
 manter o projeto do tamanho de uma peça de portfólio, focada na ideia central: um checklist
 auditável no lugar de planilha.
+
+## Licença
+
+MIT. Veja o arquivo [LICENSE](LICENSE).
