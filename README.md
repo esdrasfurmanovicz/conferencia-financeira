@@ -33,7 +33,7 @@ A regra de cálculo está isolada em `app/Services/LevyCalculator.php`.
 
 ## Stack
 
-Laravel 12 + Blade + Tailwind + Alpine.js (base do Breeze), SQLite por padrão (zero configuração para
+Laravel 13 + Blade + Tailwind + Alpine.js (base do Breeze), SQLite por padrão (zero configuração para
 rodar local). Interface toda em português do Brasil.
 
 ## Acesso e perfis
