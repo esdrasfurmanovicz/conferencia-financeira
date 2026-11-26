@@ -1,5 +1,7 @@
 # Conferência Financeira
 
+**Site do projeto:** https://esdrasfurmanovicz.github.io/conferencia-financeira/
+
 Checklist mensal para o time financeiro conferir recebimentos de clientes, pensado para
 substituir a planilha que normalmente faz esse trabalho. Feito em Laravel do zero, como peça de
 portfólio.
